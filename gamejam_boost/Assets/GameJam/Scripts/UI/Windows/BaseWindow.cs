@@ -1,3 +1,4 @@
+using GameJam.Scripts.Systems;
 using UnityEngine;
 
 namespace GameJam.Scripts.UI.Windows
@@ -17,6 +18,12 @@ namespace GameJam.Scripts.UI.Windows
     
     public abstract class BaseWindow<T> : BaseWindow
     {
-        public abstract void Setup(T model);
+        protected T Model;
+        protected Game Game;
+        public virtual void Setup(Game game, T model)
+        {
+            Game = game;
+            Model = model;
+        }
     }
 }
