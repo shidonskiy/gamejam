@@ -22,12 +22,11 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         _horizontal = Input.GetAxis("Horizontal");
-        _jump = Input.GetButtonDown("Jump");
+        _jump |= Input.GetButtonDown("Jump");
     }
 
     private void FixedUpdate()
@@ -40,6 +39,7 @@ public class PlayerController : MonoBehaviour
         if (_floor && _rb.velocity.y < 1e-3 && _jump)
         {
             VerticalMove(jumpVelocity);
+            _jump = false;
         }
     }
 
