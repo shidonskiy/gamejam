@@ -1,6 +1,7 @@
-using System;
 using System.Collections.Generic;
+using GameJam.Scripts.Controllers;
 using GameJam.Scripts.Obstacles;
+using GameJam.Scripts.Obstacles.States;
 using GameJam.Scripts.Systems;
 using GameJam.Scripts.UI.Windows;
 using UnityEngine;
@@ -11,9 +12,13 @@ namespace GameJam.Scripts.Levels
     {
         [SerializeField] private BaseObstacle.ObstacleState _currentState;
         [SerializeField] private List<Transform> _obstaclesRoot;
+        [SerializeField] private int _pointToSwitch = 3;
+        [SerializeField] private Player _player;
 
         private BaseObstacle.ObstacleState _prevState;
         private List<BaseObstacle> _obstacles;
+
+        private int _currentPoints = 0;
             
         public override void Setup(Game game)
         {
@@ -26,6 +31,8 @@ namespace GameJam.Scripts.Levels
         public void Awake()
         {
             _obstacles = GetLevelObstacles();
+            
+            _player.PointCollected += PlayerOnPointCollected;
         }
 
         public void Start()
@@ -40,6 +47,25 @@ namespace GameJam.Scripts.Levels
                 UpdateState(GetLevelObstacles());
                 
                 _prevState = _currentState;
+            }
+        }
+        
+        private void PlayerOnPointCollected(PointState.PointType pointType)
+        {
+            _currentPoints++;
+            Refresh();
+        }
+
+        private void Refresh()
+        {
+            if (_currentPoints >= _pointToSwitch)
+            {
+                _currentPoints = 0;
+                _currentState = _currentState == BaseObstacle.ObstacleState.Bad
+                    ? BaseObstacle.ObstacleState.Good
+                    : BaseObstacle.ObstacleState.Bad;
+                
+                UpdateState(_obstacles);
             }
         }
 
