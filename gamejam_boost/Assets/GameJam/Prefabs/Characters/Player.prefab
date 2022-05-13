@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7423930204302475973}
   - component: {fileID: 8241661971344934207}
   - component: {fileID: 1639941472819179528}
+  - component: {fileID: 1603997416}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -50,12 +51,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7423930204302475972
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -145,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2a5a858dffefb4d90b4dff4a2b3198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallMultiplier: 2.5
+  fallMultiplier: 8
   lowJumpMultiplier: 2
 --- !u!114 &1639941472819179528
 MonoBehaviour:
@@ -159,12 +160,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be51421854268284ea45d7c7e5512075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpVelocity: 5
-  lerpTime: 2
+  speed: 10
+  jumpVelocity: 16
+  lerpTime: 0.2
   floorDetectionDistance: 0.5
-  sideWallDetectionDistance: 0.4
-  obstacleDetectionRadius: 0.25
+  floorDetectionRadius: 0.25
+  sideWallDetectionDistance: 0.5
+  sideWallDetectionHeight: 0.8
+  sideWallDetectionWidth: 0.1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1603997416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423930204302475970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24d88ec61f844014aa1da64ef7e4ad49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
