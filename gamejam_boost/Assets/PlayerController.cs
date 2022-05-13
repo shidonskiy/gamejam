@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -17,6 +15,9 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D _rb;
 
+    private float _horizontal;
+    private bool _jump;
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -25,15 +26,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _horizontal = Input.GetAxis("Horizontal");
+        _jump = Input.GetButtonDown("Jump");
+    }
+
+    private void FixedUpdate()
+    {
         _floor = Physics2D.OverlapCircle(transform.position + Vector3.down * wallDetectionDistance, wallDetectionRadius,
             groundLayer);
-
-        var horizontal = Input.GetAxis("Horizontal");
-        var jump = Input.GetButtonDown("Jump");
-
-        HorizontalMove(Mathf.Lerp(_rb.velocity.x, horizontal * speed, lerpTime));
         
-        if (_floor && _rb.velocity.y < 1e-3 && jump)
+        HorizontalMove(Mathf.Lerp(_rb.velocity.x, _horizontal * speed, lerpTime));
+        
+        if (_floor && _rb.velocity.y < 1e-3 && _jump)
         {
             VerticalMove(jumpVelocity);
         }
