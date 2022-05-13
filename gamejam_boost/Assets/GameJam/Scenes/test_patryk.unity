@@ -351,9 +351,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a32adf6fd4b4a95a5b7e8f2e22ddead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentState: 0
   _goodState: {fileID: 933700714}
   _badState: {fileID: 1660792427}
-  _currentState: 0
 --- !u!1 &933700712
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,6 +508,8 @@ MonoBehaviour:
   _currentState: 0
   _obstaclesRoot:
   - {fileID: 202502566}
+  _pointToSwitch: 3
+  _player: {fileID: 1456813797}
 --- !u!4 &1362691326
 Transform:
   m_ObjectHideFlags: 0
@@ -524,6 +526,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1456813797 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1603997416, guid: 078f990ae927c5445b2377a0c09d9fb4, type: 3}
+  m_PrefabInstance: {fileID: 60170072}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24d88ec61f844014aa1da64ef7e4ad49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1660792425
 GameObject:
   m_ObjectHideFlags: 0
