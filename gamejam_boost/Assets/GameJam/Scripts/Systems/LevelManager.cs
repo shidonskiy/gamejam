@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace GameJam.Scripts.Systems
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : AbstractManager
     {
         [SerializeField] private LevelsData _levelData;
 

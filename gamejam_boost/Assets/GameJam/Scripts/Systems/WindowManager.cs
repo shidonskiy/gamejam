@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using GameJam.Scripts.Models;
 using GameJam.Scripts.UI.Windows;
 using UnityEngine;
 
 namespace GameJam.Scripts.Systems
 {
-    public class WindowManager : MonoBehaviour
+    public class WindowManager : AbstractManager
     {
         [SerializeField] private Transform _windowsRoot;
         [SerializeField] private List<BaseWindow> _windows;
@@ -44,15 +46,21 @@ namespace GameJam.Scripts.Systems
                     RemoveLast();
                     break;
             }
-
-            if (_windowsStack.Count > 0)
-            {
-                BaseWindow prevWindow = _windowsStack.Pop();
-                Destroy(prevWindow);
-            }
+            
             _windowsStack.Push(window);
 
             return window;
+        }
+
+        public void OpenMainmenu()
+        {
+            MainscreenWindow window = OpenWindow<MainscreenWindow>(WindowMode.Add);
+            MainscreenModel model = new MainscreenModel
+            {
+                Levels = Game.LevelManager.LevelsData.Levels.Select(l => new LevelModel(l.LevelName, l.LevelBuildId))
+                    .ToList()
+            };
+            window.Setup(Game, model);
         }
 
         public void GoBack()
@@ -93,7 +101,7 @@ namespace GameJam.Scripts.Systems
             if (_windowsStack.Count > 0)
             {
                 BaseWindow prevWindow = _windowsStack.Pop();
-                Destroy(prevWindow);
+                Destroy(prevWindow.gameObject);
             }
         }
 
