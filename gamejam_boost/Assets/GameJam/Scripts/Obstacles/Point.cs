@@ -1,4 +1,3 @@
-using System;
 using GameJam.Scripts.Obstacles.States;
 
 namespace GameJam.Scripts.Obstacles

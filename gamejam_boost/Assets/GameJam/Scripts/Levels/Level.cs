@@ -25,24 +25,19 @@ namespace GameJam.Scripts.Levels
 
         public void Awake()
         {
-            
+            _obstacles = GetLevelObstacles();
         }
 
         public void Start()
         {
-            
+            UpdateState(_obstacles);
         }
 
         private void OnValidate()
         {
             if (_prevState != _currentState)
             {
-                List<BaseObstacle> obstacles = GetLevelObstacles();
-
-                foreach (var obstacle in obstacles)
-                {
-                    obstacle.ChangeState(_currentState);
-                }
+                UpdateState(GetLevelObstacles());
                 
                 _prevState = _currentState;
             }
@@ -53,10 +48,18 @@ namespace GameJam.Scripts.Levels
             List<BaseObstacle> obstacles = new List<BaseObstacle>();
             foreach (var root in _obstaclesRoot)
             {
-                obstacles.Add(root.GetComponentInChildren<BaseObstacle>());
+                obstacles.AddRange(root.GetComponentsInChildren<BaseObstacle>(true));
             }
 
             return obstacles;
+        }
+
+        private void UpdateState(List<BaseObstacle> obstacles)
+        {
+            foreach (var obstacle in obstacles)
+            {
+                obstacle.ChangeState(_currentState);
+            }
         }
     }
 }
