@@ -39,8 +39,9 @@ public class PlayerController : MonoBehaviour
         if (_floor && _rb.velocity.y < 1e-3 && _jump)
         {
             VerticalMove(jumpVelocity);
-            _jump = false;
         }
+        
+        _jump = false;
     }
 
     private void HorizontalMove(float velocityX)
