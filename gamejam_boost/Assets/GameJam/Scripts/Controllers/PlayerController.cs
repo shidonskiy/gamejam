@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        _horizontal = Input.GetAxis("Horizontal");
+        _horizontal = Input.GetAxisRaw("Horizontal");
         _jump |= Input.GetButtonDown("Jump");
     }
 
