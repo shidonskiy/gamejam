@@ -11,13 +11,39 @@ namespace GameJam.Scripts.Obstacles
             Bad
         }
         
-        [SerializeField] private ObjectState _goodState;
-        [SerializeField] private ObjectState _badState;
         [SerializeField] private ObstacleState _currentState;
 
+        protected ObstacleState CurrentState => _currentState;
+        
         private ObstacleState _prevState;
 
         public void ChangeState(ObstacleState state)
+        {
+            ChangeStateInternal(state);
+            _currentState = state;
+        }
+
+        public abstract void ChangeStateInternal(ObstacleState state);
+
+        private void OnValidate()
+        {
+            if (_prevState != _currentState)
+            {
+                ChangeState(_currentState);
+                _prevState = _currentState;
+            }
+        }
+    }
+    
+    public abstract class BaseObstacle<T> : BaseObstacle where T : ObjectState
+    {
+        [SerializeField] private T _goodState;
+        [SerializeField] private T _badState;
+
+        protected T GoodState => _goodState;
+        protected T BadState => _badState;
+        
+        public override void ChangeStateInternal(ObstacleState state)
         {
             switch (state)
             {
@@ -29,17 +55,6 @@ namespace GameJam.Scripts.Obstacles
                     _goodState.Hide();
                     _badState.Show();
                     break;
-            }
-
-            _currentState = state;
-        }
-
-        private void OnValidate()
-        {
-            if (_prevState != _currentState)
-            {
-                ChangeState(_currentState);
-                _prevState = _currentState;
             }
         }
     }

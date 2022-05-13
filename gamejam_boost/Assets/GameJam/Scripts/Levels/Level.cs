@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GameJam.Scripts.Obstacles;
 using GameJam.Scripts.Systems;
@@ -10,9 +11,10 @@ namespace GameJam.Scripts.Levels
     {
         [SerializeField] private BaseObstacle.ObstacleState _currentState;
         [SerializeField] private List<Transform> _obstaclesRoot;
-        
-        private BaseObstacle.ObstacleState _prevState;
 
+        private BaseObstacle.ObstacleState _prevState;
+        private List<BaseObstacle> _obstacles;
+            
         public override void Setup(Game game)
         {
             base.Setup(game);
@@ -21,15 +23,21 @@ namespace GameJam.Scripts.Levels
             window.Setup(Game);
         }
 
+        public void Awake()
+        {
+            
+        }
+
+        public void Start()
+        {
+            
+        }
+
         private void OnValidate()
         {
             if (_prevState != _currentState)
             {
-                List<BaseObstacle> obstacles = new List<BaseObstacle>();
-                foreach (var root in _obstaclesRoot)
-                {
-                    obstacles.Add(root.GetComponentInChildren<BaseObstacle>());
-                }
+                List<BaseObstacle> obstacles = GetLevelObstacles();
 
                 foreach (var obstacle in obstacles)
                 {
@@ -38,6 +46,17 @@ namespace GameJam.Scripts.Levels
                 
                 _prevState = _currentState;
             }
+        }
+
+        private List<BaseObstacle> GetLevelObstacles()
+        {
+            List<BaseObstacle> obstacles = new List<BaseObstacle>();
+            foreach (var root in _obstaclesRoot)
+            {
+                obstacles.Add(root.GetComponentInChildren<BaseObstacle>());
+            }
+
+            return obstacles;
         }
     }
 }
