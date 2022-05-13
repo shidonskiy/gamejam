@@ -6,7 +6,7 @@ public static class EventSink
 {
     public static event Action GameStart;
     public static event Action LoadLevelStart;
-    public static event Action<Level> LoadLevelFinish;
+    public static event Action<BaseLevel> LoadLevelFinish;
 
     public static void OnGameStart()
     {
@@ -18,7 +18,7 @@ public static class EventSink
         LoadLevelStart?.Invoke();
     }
 
-    public static void OnLoadLevelFinish(Level level)
+    public static void OnLoadLevelFinish(BaseLevel level)
     {
         LoadLevelFinish?.Invoke(level);
     }

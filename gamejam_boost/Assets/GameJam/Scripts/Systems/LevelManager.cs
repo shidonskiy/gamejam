@@ -26,6 +26,11 @@ namespace GameJam.Scripts.Systems
             StartCoroutine(LevelLoadRoutine(levelBuildId));
         }
 
+        public void LoadMenuLevel()
+        {
+            LoadLevel(1);
+        }
+
         private IEnumerator LevelLoadRoutine(int levelBuildId)
         {
             var result = SceneManager.LoadSceneAsync(levelBuildId);
@@ -35,7 +40,7 @@ namespace GameJam.Scripts.Systems
                 yield return null;
             }
 
-            Level level = null;
+            BaseLevel level = null;
             Scene scene = SceneManager.GetActiveScene();
             foreach (var root in scene.GetRootGameObjects())
             {

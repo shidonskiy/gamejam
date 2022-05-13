@@ -52,7 +52,7 @@ namespace GameJam.Scripts.Systems
             return window;
         }
 
-        public void OpenMainmenu()
+        public void OpenMainmenu(WindowMode mode = WindowMode.Add)
         {
             MainscreenWindow window = OpenWindow<MainscreenWindow>(WindowMode.Add);
             MainscreenModel model = new MainscreenModel

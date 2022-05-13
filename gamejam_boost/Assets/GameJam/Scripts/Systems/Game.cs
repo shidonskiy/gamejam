@@ -28,14 +28,14 @@ namespace GameJam.Scripts.Systems
             EventSink.LoadLevelFinish -= EventSinkOnLoadLevelFinish;
         }
 
-        private void EventSinkOnLoadLevelFinish(Level level)
+        private void EventSinkOnLoadLevelFinish(BaseLevel level)
         {
             level.Setup(this);
         }
 
         private void Start()
         {
-            WindowManager.OpenMainmenu();
+            LevelManager.LoadMenuLevel();
         }
     }
 }

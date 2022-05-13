@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GameJam/Scenes/level_0.unity
     guid: f1ad5526c052d4a4082c1b4d6197e175
+  - enabled: 1
+    path: Assets/GameJam/Scenes/level_1.unity
+    guid: ddf369f42d9704b16b25d22304b446e0
+  - enabled: 1
+    path: Assets/GameJam/Scenes/level_2.unity
+    guid: f74f8a036fea94dd1a16a4e1ccde2390
   m_configObjects: {}

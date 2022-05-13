@@ -1,19 +1,43 @@
+using System.Collections.Generic;
+using GameJam.Scripts.Obstacles;
 using GameJam.Scripts.Systems;
 using GameJam.Scripts.UI.Windows;
 using UnityEngine;
 
 namespace GameJam.Scripts.Levels
 {
-    public class Level : MonoBehaviour
+    public class Level : BaseLevel
     {
-        private Game _game;
+        [SerializeField] private BaseObstacle.ObstacleState _currentState;
+        [SerializeField] private List<Transform> _obstaclesRoot;
+        
+        private BaseObstacle.ObstacleState _prevState;
 
-        public void Setup(Game game)
+        public override void Setup(Game game)
         {
-            _game = game;
+            base.Setup(game);
 
-            LevelWindow window = _game.WindowManager.OpenWindow<LevelWindow>(WindowManager.WindowMode.Clear);
-            window.Setup(_game);
+            LevelWindow window = Game.WindowManager.OpenWindow<LevelWindow>(WindowManager.WindowMode.Clear);
+            window.Setup(Game);
+        }
+
+        private void OnValidate()
+        {
+            if (_prevState != _currentState)
+            {
+                List<BaseObstacle> obstacles = new List<BaseObstacle>();
+                foreach (var root in _obstaclesRoot)
+                {
+                    obstacles.Add(root.GetComponentInChildren<BaseObstacle>());
+                }
+
+                foreach (var obstacle in obstacles)
+                {
+                    obstacle.ChangeState(_currentState);
+                }
+                
+                _prevState = _currentState;
+            }
         }
     }
 }
