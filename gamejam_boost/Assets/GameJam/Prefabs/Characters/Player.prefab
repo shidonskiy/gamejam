@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7423930204302475974}
   - component: {fileID: 7423930204302475972}
   - component: {fileID: 7423930204302475973}
-  - component: {fileID: 7423930204302475975}
-  - component: {fileID: 7423930204302475992}
+  - component: {fileID: 8241661971344934207}
+  - component: {fileID: 1639941472819179528}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -133,7 +133,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7423930204302475975
+--- !u!114 &8241661971344934207
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,12 +142,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7423930204302475970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56e6fc08b0a391449c9428a1fe3b2dd, type: 3}
+  m_Script: {fileID: 11500000, guid: ef2a5a858dffefb4d90b4dff4a2b3198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
---- !u!114 &7423930204302475992
+--- !u!114 &1639941472819179528
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,14 +156,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7423930204302475970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6af892f1551fef244a716c0ecdaa1a45, type: 3}
+  m_Script: {fileID: 11500000, guid: be51421854268284ea45d7c7e5512075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
   jumpVelocity: 5
   lerpTime: 2
-  wallDetectionDistance: 0.5
-  wallDetectionRadius: 0.2
+  floorDetectionDistance: 0.5
+  sideWallDetectionDistance: 0.4
+  obstacleDetectionRadius: 0.25
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
