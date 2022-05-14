@@ -42,7 +42,7 @@ namespace GameJam.Scripts.Controllers
         {
             StartTransition();
             UpdateTransition(Vector3.zero, _radius, _level.MaxRadius);
-            _level.ShowAll();
+            //_level.ShowAll();
         }
     }
 }

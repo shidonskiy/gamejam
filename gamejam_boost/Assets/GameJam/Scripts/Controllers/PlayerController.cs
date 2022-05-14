@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
                 if (col.collider.TryGetComponent(out SpikeObjectState spikes))
                 {
                     _rb.constraints = RigidbodyConstraints2D.FreezeAll;
-                    spikes.Touch();
+                    _player.Die();
                 }
                 break;
             case Layers.BadSheep:
