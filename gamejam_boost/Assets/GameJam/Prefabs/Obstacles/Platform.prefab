@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6993730962436356094
 Transform:
   m_ObjectHideFlags: 0
@@ -99,7 +99,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.022499999, y: 0.067499995, z: 0.0525, w: 0.06}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.2225, y: 0.455}
     newSize: {x: 1, y: 1}
@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6993730962794238048
 Transform:
   m_ObjectHideFlags: 0
@@ -221,7 +221,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.024999999, y: 0.0275, z: 0.035, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.2075, y: 0.405}
     newSize: {x: 1, y: 1}
@@ -289,6 +289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a32adf6fd4b4a95a5b7e8f2e22ddead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentState: 1
+  _currentState: 0
   _goodState: {fileID: 6993730962436356067}
   _badState: {fileID: 6993730962794238053}
