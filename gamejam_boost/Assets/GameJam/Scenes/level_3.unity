@@ -11278,6 +11278,8 @@ MonoBehaviour:
   _radius: 26.27
   _level: {fileID: 1959245800}
   _lineWidth: 0.5
+  _goodColor: {r: 0.38431376, g: 0.72156864, b: 0.6, a: 1}
+  _badColor: {r: 0.5137255, g: 0.050980397, b: 0.6117647, a: 1}
 --- !u!114 &1959245803
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,6 @@ Shader "Sprites/Disolve"
         [PerRendererData] _EnableExternalAlpha ("Enable External Alpha", Float) = 0
         
         _DissolveNoiseMap("Dissolve Noise Map", 2D) = "white" {}
-        _DissolveLineColor("Dissolve Line Color", Color) = (1,1,1,1)
         _DissolveAmount("Dissolve Amount", Float) = 1.0
         _DissolveInverse("Inverse", Float) = 0.0
     }

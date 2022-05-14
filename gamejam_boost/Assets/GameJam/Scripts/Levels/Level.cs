@@ -78,7 +78,7 @@ namespace GameJam.Scripts.Levels
             if (_prevState != _currentState)
             {
                 UpdateState(GetLevelObstacles());
-                
+                _controller.UpdateState(_currentState);
                 _prevState = _currentState;
             }
         }
@@ -125,6 +125,7 @@ namespace GameJam.Scripts.Levels
             _radius = 0;
             
             _controller.StartTransition();
+            _controller.UpdateState(_currentState);
             
             while (currentTime < _transitionTime)
             {
@@ -158,6 +159,7 @@ namespace GameJam.Scripts.Levels
             {
                 obstacle.ChangeState(_currentState);
             }
+            _controller.UpdateState(_currentState);
             _controller.FinishTransition();
         }
 

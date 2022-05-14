@@ -1,5 +1,6 @@
 using System;
 using GameJam.Scripts.Levels;
+using GameJam.Scripts.Obstacles;
 using UnityEngine;
 
 namespace GameJam.Scripts.Controllers
@@ -9,6 +10,8 @@ namespace GameJam.Scripts.Controllers
         [SerializeField] private float _radius;
         [SerializeField] private Level _level;
         [SerializeField] private float _lineWidth;
+        [SerializeField] private Color _goodColor;
+        [SerializeField] private Color _badColor;
 
         public void StartTransition()
         {
@@ -19,12 +22,20 @@ namespace GameJam.Scripts.Controllers
         {
             Shader.SetGlobalFloat("_DissolveEnabled", 0);
         }
+
+        public void UpdateState(BaseObstacle.ObstacleState state)
+        {
+            if(state == BaseObstacle.ObstacleState.Good)
+                Shader.SetGlobalColor("_DissolveLineColor", _badColor);
+            else
+                Shader.SetGlobalColor("_DissolveLineColor", _goodColor);
+        }
         
         public void UpdateTransition(Vector3 origin, float radius, float maxRadius)
         {
             Shader.SetGlobalFloat("_DissolveRadius", radius);
             Shader.SetGlobalVector("_DissolvePosition", origin);
-            Shader.SetGlobalFloat("_DissolveLineWidth", _lineWidth - _lineWidth * (radius / maxRadius));
+            Shader.SetGlobalFloat("_DissolveLineWidth", _lineWidth - _lineWidth * Mathf.Clamp01(radius / maxRadius));
         }
 
         private void OnValidate()

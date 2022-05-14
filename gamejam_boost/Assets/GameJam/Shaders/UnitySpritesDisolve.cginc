@@ -112,16 +112,18 @@ fixed4 SpriteFrag(v2f IN) : SV_Target
     
     fixed4 c = SampleSpriteTexture(IN.texcoord) * IN.color;
     c.rgb *= c.a;
+    fixed4 color = c;
+
+    //fixed amount = lerp(sphere, 1 - sphere, 1 - _DissolveInverse);
+    float border = smoothstep(_DissolveAmount, _DissolveAmount + _DissolveLineWidth, sphere);
+    border = lerp(border, 1 - border, 1 - _DissolveInverse);
+    float3 disLine = 1 - border;
+    disLine *= _DissolveLineColor.rgb;
     
-    // float border = smoothstep(_DissolveAmount, _DissolveAmount + _DissolveLineWidth, sphere);
-    // border = lerp(border, 1 - border, 1 - _DissolveInverse);
-    // float3 disLine = 1 - border;
-    // disLine *= _DissolveLineColor.rgb;
-    //
-    // c.rgb = border * c.rgb;
-    // c.rgb += disLine;
+    c.rgb = border * c.rgb;
+    c.rgb += disLine;
     
-    return c;
+    return lerp(color, c, _DissolveEnabled);
 }
 
 #endif // UNITY_SPRITES_INCLUDED
