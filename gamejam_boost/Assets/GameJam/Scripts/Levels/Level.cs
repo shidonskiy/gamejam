@@ -112,7 +112,7 @@ namespace GameJam.Scripts.Levels
             
             foreach (var obstacle in _obstacles)
             {
-                obstacle.UpdateTransition(_player.transform.position, _radius, _currentState);
+                obstacle.UpdateTransition(_player.transform.position, _radius, _currentState, last);
             }
         }
 
