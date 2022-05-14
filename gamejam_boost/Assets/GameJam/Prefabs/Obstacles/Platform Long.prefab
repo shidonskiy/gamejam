@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0d7d9afb204c7c4478863aec92c39cb9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a34e28bf68adcff4fa322fa63221763a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,14 +101,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2225, y: 0.455}
+    oldSize: {x: 2.47, y: 0.455}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.3}
+  m_Size: {x: 2, y: 0.3}
   m_EdgeRadius: 0
 --- !u!114 &6993730962436356067
 MonoBehaviour:
@@ -195,7 +195,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ecbb6514ed9c50441a515fcaca159613, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b1925a705bf97d44f89e0c13004c7cf0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -223,14 +223,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2075, y: 0.405}
+    oldSize: {x: 2.47, y: 0.455}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.3}
+  m_Size: {x: 2, y: 0.3}
   m_EdgeRadius: 0
 --- !u!114 &6993730962794238053
 MonoBehaviour:
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 6993730963393606489}
   - component: {fileID: 6993730963393606488}
   m_Layer: 6
-  m_Name: Platform
+  m_Name: Platform Long
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
