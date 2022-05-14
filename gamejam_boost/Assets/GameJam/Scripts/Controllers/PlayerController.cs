@@ -131,7 +131,10 @@ public class PlayerController : MonoBehaviour
             if (col.collider.TryGetComponent(out BouncingObjectState bouncer))
             {
                 StartCoroutine(blockMovement(bouncer._movementBlockTime));
-                _rb.velocity = Vector2.Reflect( _previousVelocity.normalized, bouncer.transform.up) * bouncer._bounceForce;
+
+                _rb.velocity = bouncer.transform.up * bouncer._bounceForce;
+                //Reflected bounce
+                //_rb.velocity = Vector2.Reflect( _previousVelocity.normalized, bouncer.transform.up) * bouncer._bounceForce;
             }
         }
         else if (col.gameObject.layer == Layers.GoodSheep)
