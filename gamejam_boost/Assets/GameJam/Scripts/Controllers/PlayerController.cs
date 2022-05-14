@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
@@ -58,10 +59,10 @@ public class PlayerController : MonoBehaviour
                 _horizontal = Mathf.Min(_horizontal, 0f);
             } 
         }
-
-        HorizontalMove(Mathf.Lerp(_rb.velocity.x, _horizontal * speed, lerpTime));
         
-        if (_floor && _rb.velocity.y < 1e-3 && _jump)
+        HorizontalMove(Mathf.Lerp(_rb.velocity.x, _horizontal * speed, lerpTime));
+
+        if (_floor && _jump)
         {
             VerticalMove(jumpVelocity);
         }
