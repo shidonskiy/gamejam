@@ -14,8 +14,9 @@ namespace GameJam.Scripts.Obstacles.States
 
         private Rigidbody2D _rb;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _rb = GetComponent<Rigidbody2D>();
         }
 

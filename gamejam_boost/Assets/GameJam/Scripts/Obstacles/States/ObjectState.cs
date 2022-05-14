@@ -8,7 +8,7 @@ namespace GameJam.Scripts.Obstacles.States
         private Renderer _renderer;
         private MaterialPropertyBlock _block;
         
-        void Awake()
+        protected virtual void Awake()
         {
             _collider = GetComponent<Collider2D>();
             _renderer = GetComponent<Renderer>();

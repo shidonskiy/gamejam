@@ -62,7 +62,6 @@ namespace GameJam.Scripts.Obstacles
             if (overlapType == -1)
             {
                 ChangeState(newState);
-                Debug.Log($"{name} {CurrentState} {CurrentObject.name}");
             }
             else if(overlapType == 0)
             {
