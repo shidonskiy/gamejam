@@ -27,7 +27,7 @@ namespace GameJam.Scripts.Obstacles
 
         public abstract void ShowAll();
 
-        public abstract void UpdateTransition(Vector3 origin, float radius, ObstacleState newState);
+        public abstract void UpdateTransition(Vector3 origin, float radius, ObstacleState newState, bool last = false);
 
         public abstract void ChangeStateInternal(ObstacleState state);
 
@@ -51,10 +51,18 @@ namespace GameJam.Scripts.Obstacles
 
         protected T CurrentObject;
 
-        public override void UpdateTransition(Vector3 origin, float radius, ObstacleState newState)
+        public override void UpdateTransition(Vector3 origin, float radius, ObstacleState newState, bool last = false)
         {
             if(CurrentState == newState)
             {
+                return;
+            }
+
+            if (last)
+            {
+                ChangeState(newState);
+                GoodState.UpdateTransitionDirection(newState != ObstacleState.Good);
+                BadState.UpdateTransitionDirection(newState != ObstacleState.Bad);
                 return;
             }
 

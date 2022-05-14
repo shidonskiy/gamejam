@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Numerics;
+using GameJam.Scripts.Controllers;
 using GameJam.Scripts.Obstacles.States;
 using GameJam.Scripts.Utils;
 using UnityEngine;
@@ -21,13 +22,16 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask groundLayer;
     
+    [SerializeField] private Player _player;
+
+    public Vector2 Direction => _direction;
+    
     private bool _leftWall;
     private bool _rightWall;
     private bool _floor;
 
     private Rigidbody2D _rb;
-
-    private Vector2 _previousVelocity;
+    
     private Vector2 _prevPos;
     private Vector2 _direction;
 
@@ -36,6 +40,9 @@ public class PlayerController : MonoBehaviour
     private bool _jump;
 
     private bool _movementBlocked;
+    private static readonly int Move = Animator.StringToHash("Move");
+    private static readonly int Jump = Animator.StringToHash("Jump");
+    private static readonly int Fall = Animator.StringToHash("Fall");
 
     void Awake()
     {
@@ -88,15 +95,20 @@ public class PlayerController : MonoBehaviour
             if (_floor && _jump)
             {
                 VerticalMove(jumpVelocity);
+                _player.Jump();
             }
         }
-
-        _direction = _rb.position - _prevPos;
         
-        _previousVelocity = _rb.velocity;
+        _player.Move(_floor ? Mathf.Abs(_horizontal) : 0);
+        _player.Fall(!_floor);
+
+        var position = _rb.position;
+        _direction = position - _prevPos;
         _horizontalPrevious = _horizontal;
-        _prevPos = _rb.position;
+        _prevPos = position;
         _jump = false;
+        
+        _player.UpdateDirection(_direction.x);
     }
 
     private void HorizontalMove(float velocityX)

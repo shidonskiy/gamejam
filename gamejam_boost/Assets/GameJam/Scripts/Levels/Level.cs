@@ -80,7 +80,7 @@ namespace GameJam.Scripts.Levels
                 _prevState = _currentState;
             }
         }
-        
+
         private void PlayerOnPointCollected(PointState.PointType pointType)
         {
             _currentPoints++;
@@ -104,7 +104,7 @@ namespace GameJam.Scripts.Levels
             }
         }
 
-        private void UpdateTransition()
+        private void UpdateTransition(bool last = false)
         {
             _controller.UpdateTransition(_player.transform.position, _radius, _maxRadius);
             
@@ -133,9 +133,8 @@ namespace GameJam.Scripts.Levels
             }
 
             _radius = _maxRadius;
-            UpdateTransition();
-
             _isTransition = false;
+            UpdateTransition(true);
             _controller.FinishTransition();
         }
 
