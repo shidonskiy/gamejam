@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D _rb;
 
+    private Vector2 _previousVelocity;
+
     private float _horizontal;
     private float _horizontalPrevious;
     private bool _jump;
@@ -87,6 +89,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        _previousVelocity = _rb.velocity;
         _horizontalPrevious = _horizontal;
         _jump = false;
     }
@@ -116,14 +119,14 @@ public class PlayerController : MonoBehaviour
             new Vector3(sideWallDetectionWidth, sideWallDetectionHeight, 0f));
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.layer == Layers.Bouncer)
         {
-            if (col.TryGetComponent(out BouncingObjectState bouncer))
+            if (col.collider.TryGetComponent(out BouncingObjectState bouncer))
             {
                 StartCoroutine(blockMovement(bouncer._movementBlockTime));
-                _rb.velocity =bouncer._bounceDirection.localPosition * bouncer._bounceForce;
+                _rb.velocity = Vector2.Reflect( _previousVelocity.normalized, bouncer.transform.up) * bouncer._bounceForce;
             }
         }
     }
