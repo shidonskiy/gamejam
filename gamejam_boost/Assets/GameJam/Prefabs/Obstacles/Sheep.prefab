@@ -359,6 +359,7 @@ MonoBehaviour:
   _waitTime: 0.5
   _pushForce: 30
   _blockTime: 0.5
+  _animator: {fileID: 857342910516950835}
 --- !u!95 &857342910516950835
 Animator:
   serializedVersion: 3
