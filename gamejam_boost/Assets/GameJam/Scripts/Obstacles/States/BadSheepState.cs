@@ -7,7 +7,13 @@ namespace GameJam.Scripts.Obstacles.States
         [SerializeField] private float _speed;
         [SerializeField] private AnimationCurve _curve;
         [SerializeField] private float _waitTime = 0.5f;
+        [SerializeField] private float _pushForce = 1;
+        [SerializeField] private float _blockTime = 0.5f;
 
+        public float PushForce => _pushForce;
+        public float BlockTime => _blockTime;
+        public Vector2 FaceDirection => _inverseDir ? -1 * transform.right : transform.right; 
+        
         private float _currentTime;
         private bool _isWaiting;
 

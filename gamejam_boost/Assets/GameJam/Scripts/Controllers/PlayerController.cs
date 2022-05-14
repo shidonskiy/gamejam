@@ -163,6 +163,20 @@ public class PlayerController : MonoBehaviour
                     spikes.Touch();
                 }
                 break;
+            case Layers.BadSheep:
+                if (col.collider.TryGetComponent(out BadSheepState badSheep))
+                {
+                    Vector3 dir = badSheep.transform.position - transform.position;
+                    float dot = Vector2.Dot(dir.normalized, badSheep.FaceDirection);
+                    //Debug.Log($"Push {badSheep.FaceDirection} {dot}");
+                    //if (dot < -0.5)
+                    {
+                        //Debug.Log($"Push {badSheep.FaceDirection}");
+                        StartCoroutine(blockMovement(badSheep.BlockTime));
+                        _rb.velocity = badSheep.FaceDirection * badSheep.PushForce;
+                    }
+                }
+                break;
         }
 
     }

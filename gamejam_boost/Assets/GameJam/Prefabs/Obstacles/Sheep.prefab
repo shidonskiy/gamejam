@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 3148593219718635552}
   - component: {fileID: 3148593219718635553}
   - component: {fileID: 1335335405}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,6 +356,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _waitTime: 0.5
+  _pushForce: 30
+  _blockTime: 0.5
 --- !u!1 &3148593219768341041
 GameObject:
   m_ObjectHideFlags: 0
