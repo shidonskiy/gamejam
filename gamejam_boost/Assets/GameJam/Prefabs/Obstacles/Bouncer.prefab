@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5d4babf04f496bbd4beea51668d76a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementBlockTime: 0.5
+  _movementBlockTime: 0.2
   _bounceForce: 20
 --- !u!1 &6836295469587838414
 GameObject:
