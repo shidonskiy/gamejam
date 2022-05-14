@@ -5,13 +5,13 @@ namespace GameJam.Scripts.Obstacles.States
     public class PlayerState : ObjectState
     {
         [SerializeField] private Animator _animator;
-        [SerializeField] private SpriteRenderer _renderer;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
 
         public Animator Animator => _animator;
         
         public void UpdateDirection(float direction)
         {
-            _renderer.flipX = direction < 0;
+            _spriteRenderer.flipX = direction < 0;
         }
     }
 }
