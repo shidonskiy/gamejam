@@ -1,14 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using GameJam.Scripts.Levels;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelRestart : MonoBehaviour
 {
     [SerializeField] private float _timeHoldToRestart = 1f;
     [SerializeField] private KeyCode _keyToHold = KeyCode.R;
+    [SerializeField] private Level _level;
 
     private float _timer;
+
+    private void Awake()
+    {
+        _level = GetComponent<Level>();
+    }
 
     void Update()
     {
@@ -19,13 +24,7 @@ public class LevelRestart : MonoBehaviour
 
         if (Input.GetKey(_keyToHold) && Time.time - _timer > _timeHoldToRestart)
         {
-            ReloadScene();
+            _level.Restart();
         }
-    }
-
-    static public void ReloadScene()
-    {
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
     }
 }

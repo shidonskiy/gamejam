@@ -31,6 +31,12 @@ namespace GameJam.Scripts.Systems
             LoadLevel(1);
         }
 
+        public void RestartLevel()
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            LoadLevel(scene.buildIndex);
+        }
+
         private IEnumerator LevelLoadRoutine(int levelBuildId)
         {
             var result = SceneManager.LoadSceneAsync(levelBuildId);

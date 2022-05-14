@@ -32,13 +32,17 @@ namespace GameJam.Scripts.Levels
 
         private int _currentPoints = 0;
         private Coroutine _transitionRoutine;
-            
+
+        public event Action<int, int> PointsGained;
+        public event Action RestartLevel;
+
         public override void Setup(Game game)
         {
             base.Setup(game);
 
             LevelWindow window = Game.WindowManager.OpenWindow<LevelWindow>(WindowManager.WindowMode.Clear);
-            window.Setup(Game);
+            window.Setup(Game, this);
+            OnPointsGained(_currentPoints, _pointToSwitch);
         }
 
         public void ShowAll()
@@ -56,7 +60,13 @@ namespace GameJam.Scripts.Levels
             _obstacles = GetLevelObstacles();
             
             _player.PointCollected += PlayerOnPointCollected;
+            _player.Death += PlayerOnDeath;
             _controller.FinishTransition();
+        }
+
+        private void PlayerOnDeath()
+        {
+            Restart();
         }
 
         private void Start()
@@ -87,6 +97,8 @@ namespace GameJam.Scripts.Levels
         {
             _currentPoints++;
             Refresh();
+            
+            OnPointsGained(_currentPoints, _pointToSwitch);
         }
 
         private void Refresh()
@@ -169,6 +181,16 @@ namespace GameJam.Scripts.Levels
             Gizmos.DrawWireSphere(_player.transform.position, _maxRadius);
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(_player.transform.position, _radius);
+        }
+
+        protected virtual void OnPointsGained(int current, int max)
+        {
+            PointsGained?.Invoke(current, max);
+        }
+
+        public void Restart()
+        {
+            RestartLevel?.Invoke();
         }
     }
 }

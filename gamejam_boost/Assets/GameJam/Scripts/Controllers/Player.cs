@@ -13,6 +13,7 @@ namespace GameJam.Scripts.Controllers
         private static readonly int FallKey = Animator.StringToHash("Fall");
 
         public event Action<PointState.PointType> PointCollected;
+        public event Action Death;
 
         public void Jump()
         {
@@ -49,6 +50,11 @@ namespace GameJam.Scripts.Controllers
                 BadState.Animator.SetBool(FallKey, value);
             }
         }
+
+        public void Die()
+        {
+            OnDeath();
+        }
         
         public void UpdateDirection(float direction)
         {
@@ -82,6 +88,11 @@ namespace GameJam.Scripts.Controllers
         protected virtual void OnPointCollected(PointState.PointType type)
         {
             PointCollected?.Invoke(type);
+        }
+
+        protected virtual void OnDeath()
+        {
+            Death?.Invoke();
         }
     }
 }

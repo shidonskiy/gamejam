@@ -14,8 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levels:
   - _levelBuildId: 2
-    _levelName: TestControls
-  - _levelBuildId: 3
-    _levelName: TestStates
-  - _levelBuildId: 4
-    _levelName: TestLevel
+    _levelName: Play
