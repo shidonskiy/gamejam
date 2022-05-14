@@ -25,13 +25,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rb;
 
     private float _horizontal;
+    private float _horizontalPrevious;
     private bool _jump;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
-    
+
     void Update()
     {
         _horizontal = Input.GetAxisRaw("Horizontal");
@@ -40,33 +41,44 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _floor = Physics2D.OverlapCircle(transform.position + Vector3.down * floorDetectionDistance, floorDetectionRadius, groundLayer);
+        _floor = Physics2D.OverlapCircle(transform.position + Vector3.down * floorDetectionDistance,
+            floorDetectionRadius, groundLayer);
         _leftWall = Physics2D.OverlapArea(
-            transform.position + Vector3.left * (sideWallDetectionDistance-sideWallDetectionWidth) + Vector3.up * sideWallDetectionHeight / 2 ,
-            transform.position + Vector3.left * (sideWallDetectionDistance+sideWallDetectionWidth) + Vector3.down * sideWallDetectionHeight / 2, groundLayer);
-        
+            transform.position + Vector3.left * (sideWallDetectionDistance - sideWallDetectionWidth) +
+            Vector3.up * sideWallDetectionHeight / 2,
+            transform.position + Vector3.left * (sideWallDetectionDistance + sideWallDetectionWidth) +
+            Vector3.down * sideWallDetectionHeight / 2, groundLayer);
+
         _rightWall = Physics2D.OverlapArea(
-            transform.position + Vector3.right * (sideWallDetectionDistance-sideWallDetectionWidth) + Vector3.up * sideWallDetectionHeight / 2 ,
-            transform.position + Vector3.right * (sideWallDetectionDistance+sideWallDetectionWidth) + Vector3.down * sideWallDetectionHeight / 2, groundLayer);
+            transform.position + Vector3.right * (sideWallDetectionDistance - sideWallDetectionWidth) +
+            Vector3.up * sideWallDetectionHeight / 2,
+            transform.position + Vector3.right * (sideWallDetectionDistance + sideWallDetectionWidth) +
+            Vector3.down * sideWallDetectionHeight / 2, groundLayer);
 
         if (!_floor)
         {
             if (_leftWall)
             {
                 _horizontal = Mathf.Max(_horizontal, 0f);
-            } else if (_rightWall)
+            }
+            else if (_rightWall)
             {
                 _horizontal = Mathf.Min(_horizontal, 0f);
-            } 
+            }
         }
-        
-        HorizontalMove(Mathf.Lerp(_rb.velocity.x, _horizontal * speed, lerpTime));
+
+        //Stopping player only if it was previously moving (to enable moving with platforms)
+        if (Mathf.Abs(_horizontalPrevious) > 1e-3 || Mathf.Abs(_horizontal) > 1e-3)
+        {
+            HorizontalMove(Mathf.Lerp(_rb.velocity.x, _horizontal * speed, lerpTime));
+        }
 
         if (_floor && _jump)
         {
             VerticalMove(jumpVelocity);
         }
-        
+
+        _horizontalPrevious = _horizontal;
         _jump = false;
     }
 
@@ -89,8 +101,9 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.red;
 
         Gizmos.DrawWireSphere(transform.position + Vector3.down * floorDetectionDistance, floorDetectionRadius);
-        Gizmos.DrawWireCube(transform.position + Vector3.left * sideWallDetectionDistance, new Vector3(sideWallDetectionWidth, sideWallDetectionHeight, 0f));
-        Gizmos.DrawWireCube(transform.position + Vector3.right * sideWallDetectionDistance, new Vector3(sideWallDetectionWidth, sideWallDetectionHeight, 0f));
-
+        Gizmos.DrawWireCube(transform.position + Vector3.left * sideWallDetectionDistance,
+            new Vector3(sideWallDetectionWidth, sideWallDetectionHeight, 0f));
+        Gizmos.DrawWireCube(transform.position + Vector3.right * sideWallDetectionDistance,
+            new Vector3(sideWallDetectionWidth, sideWallDetectionHeight, 0f));
     }
 }
