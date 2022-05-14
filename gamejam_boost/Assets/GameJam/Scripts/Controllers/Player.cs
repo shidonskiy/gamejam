@@ -21,6 +21,17 @@ namespace GameJam.Scripts.Controllers
             }
         }
 
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            if (col.collider.gameObject.layer == Layers.Spikes)
+            {
+                if (col.collider.TryGetComponent(out SpikeObjectState _))
+                {
+                    
+                }
+            }
+        }
+
         protected virtual void OnPointCollected(PointState.PointType type)
         {
             PointCollected?.Invoke(type);
