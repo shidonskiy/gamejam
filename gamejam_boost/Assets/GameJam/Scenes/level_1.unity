@@ -1011,20 +1011,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 1557944065}
     m_Modifications:
     - target: {fileID: 1335335405, guid: 7914f05528e584b888031c2adb87ed91, type: 3}
-      propertyPath: _pushForce
-      value: 30
-      objectReference: {fileID: 0}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 3148593218789046736}
     - target: {fileID: 3148593218160092683, guid: 7914f05528e584b888031c2adb87ed91, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3148593219718635556, guid: 7914f05528e584b888031c2adb87ed91, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 3148593219718635556, guid: 7914f05528e584b888031c2adb87ed91, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3148593219768341040, guid: 7914f05528e584b888031c2adb87ed91, type: 3}
       propertyPath: m_RootOrder
@@ -1080,3 +1076,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7914f05528e584b888031c2adb87ed91, type: 3}
+--- !u!95 &3148593218789046736 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 857342910516950835, guid: 7914f05528e584b888031c2adb87ed91, type: 3}
+  m_PrefabInstance: {fileID: 3148593218789046735}
+  m_PrefabAsset: {fileID: 0}

@@ -9,6 +9,7 @@ namespace GameJam.Scripts.Obstacles.States
         [SerializeField] private float _waitTime = 0.5f;
         [SerializeField] private float _pushForce = 1;
         [SerializeField] private float _blockTime = 0.5f;
+        [SerializeField] private Animator _animator;
 
         public float PushForce => _pushForce;
         public float BlockTime => _blockTime;
@@ -16,6 +17,7 @@ namespace GameJam.Scripts.Obstacles.States
         
         private float _currentTime;
         private bool _isWaiting;
+        private static readonly int Charge = Animator.StringToHash("Charge");
 
         private void FixedUpdate()
         {
@@ -30,6 +32,7 @@ namespace GameJam.Scripts.Obstacles.States
 
                 if (_currentTime > _waitTime)
                 {
+                    _animator.SetTrigger(Charge);
                     _currentTime = 0;
                     _isWaiting = false;
                 }
