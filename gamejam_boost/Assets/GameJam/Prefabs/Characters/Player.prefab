@@ -70,8 +70,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: 0, y: -0.11436796}
+  m_Size: {x: 1, y: 1.2287359}
   m_Direction: 0
 --- !u!212 &7423930204302475973
 SpriteRenderer:
@@ -113,7 +113,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d2a10ac7fba94a3c8a6db12f9b4e111, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   speed: 10
   jumpVelocity: 16
   lerpTime: 0.2
-  floorDetectionDistance: 0.5
+  floorDetectionDistance: 0.62
   floorDetectionRadius: 0.25
   sideWallDetectionDistance: 0.5
   sideWallDetectionHeight: 0.8
