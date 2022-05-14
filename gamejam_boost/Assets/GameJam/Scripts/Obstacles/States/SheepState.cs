@@ -13,11 +13,17 @@ namespace GameJam.Scripts.Obstacles.States
         protected float _distance;
 
         protected bool _isInited;
-        
+
         protected override void Awake()
         {
+            base.Awake();
             _rb = GetComponent<Rigidbody2D>();
             _currentTarget = _targetPosition.position;
+        }
+
+        protected virtual void Update()
+        {
+            Renderer.flipX = _inverseDir;
         }
 
         public void Setup(Vector3 originTarget)

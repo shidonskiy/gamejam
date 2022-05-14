@@ -51,6 +51,8 @@ namespace GameJam.Scripts.Obstacles
 
         protected T CurrentObject;
 
+        protected virtual bool SyncPosition => false;
+
         public override void UpdateTransition(Vector3 origin, float radius, ObstacleState newState, bool last = false)
         {
             if(CurrentState == newState)
@@ -74,14 +76,33 @@ namespace GameJam.Scripts.Obstacles
             else if(overlapType == 0)
             {
                 ShowAll();
+                SyncPositions(newState);
             }
             
             GoodState.UpdateTransitionDirection(newState != ObstacleState.Good);
             BadState.UpdateTransitionDirection(newState != ObstacleState.Bad);
         }
 
+        public virtual void SyncPositions(ObstacleState state)
+        {
+            if(!SyncPosition)
+                return;
+            
+            switch (state)
+            {
+                case ObstacleState.Good:
+                    GoodState.transform.position = BadState.transform.position;
+                    break;
+                case ObstacleState.Bad:
+                    BadState.transform.position = GoodState.transform.position;
+                    break;
+            }
+        }
+
         public override void ChangeStateInternal(ObstacleState state)
         {
+            SyncPositions(state);
+            
             switch (state)
             {
                 case ObstacleState.Good:

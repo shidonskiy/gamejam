@@ -5,13 +5,15 @@ namespace GameJam.Scripts.Obstacles.States
     public class ObjectState : MonoBehaviour
     {
         private Collider2D _collider;
-        private Renderer _renderer;
+        private SpriteRenderer _renderer;
         private MaterialPropertyBlock _block;
+
+        protected SpriteRenderer Renderer => _renderer;
         
         protected virtual void Awake()
         {
             _collider = GetComponent<Collider2D>();
-            _renderer = GetComponent<Renderer>();
+            _renderer = GetComponentInChildren<SpriteRenderer>();
             _block = new MaterialPropertyBlock();
         }
         
