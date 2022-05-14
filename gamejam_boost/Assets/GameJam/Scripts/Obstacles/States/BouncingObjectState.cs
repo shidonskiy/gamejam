@@ -7,6 +7,5 @@ namespace GameJam.Scripts.Obstacles.States
     {
         public float _movementBlockTime;
         public float _bounceForce;
-        public Transform _bounceDirection;
     }
 }
