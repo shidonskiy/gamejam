@@ -23,8 +23,10 @@ namespace GameJam.Scripts.Levels
         [SerializeField] private float _radius;
         [SerializeField] private bool _isTransition;
 
-        public float MaxRadius => _maxRadius;
+        [SerializeField] private CrossfadeAudio _audio;
 
+        public float MaxRadius => _maxRadius;
+        
         private BaseObstacle.ObstacleState _prevState;
         private List<BaseObstacle> _obstacles;
 
@@ -117,6 +119,7 @@ namespace GameJam.Scripts.Levels
         private IEnumerator TransitionRoutine()
         {
             _isTransition = true;
+            _audio.Fade(_currentState);
             float speed = _maxRadius / _transitionTime;
             float currentTime = 0;
             _radius = 0;
