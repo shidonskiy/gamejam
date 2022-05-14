@@ -126,24 +126,33 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.layer == Layers.Bouncer)
+        switch (col.gameObject.layer)
         {
-            if (col.collider.TryGetComponent(out BouncingObjectState bouncer))
-            {
-                StartCoroutine(blockMovement(bouncer._movementBlockTime));
+            case Layers.Bouncer:
+                if (col.collider.TryGetComponent(out BouncingObjectState bouncer))
+                {
+                    StartCoroutine(blockMovement(bouncer._movementBlockTime));
 
-                _rb.velocity = bouncer.transform.up * bouncer._bounceForce;
-                //Reflected bounce
-                //_rb.velocity = Vector2.Reflect( _previousVelocity.normalized, bouncer.transform.up) * bouncer._bounceForce;
-            }
+                    _rb.velocity = bouncer.transform.up * bouncer._bounceForce;
+                    //Reflected bounce
+                    //_rb.velocity = Vector2.Reflect( _previousVelocity.normalized, bouncer.transform.up) * bouncer._bounceForce;
+                }
+                break;
+            case Layers.GoodSheep:
+                if (col.collider.TryGetComponent(out GoodSheepState sheep))
+                {
+                    _rb.velocity = Vector2.Reflect( _direction.normalized, sheep.transform.up) * sheep.BounceForce;
+                }
+                break;
+            case Layers.Spikes:
+                if (col.collider.TryGetComponent(out SpikeObjectState spikes))
+                {
+                    _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                    spikes.Touch();
+                }
+                break;
         }
-        else if (col.gameObject.layer == Layers.GoodSheep)
-        {
-            if (col.collider.TryGetComponent(out GoodSheepState sheep))
-            {
-                _rb.velocity = Vector2.Reflect( _direction.normalized, sheep.transform.up) * sheep.BounceForce;
-            }
-        }
+
     }
     
     IEnumerator blockMovement(float blockTime) {

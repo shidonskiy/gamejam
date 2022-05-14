@@ -19,8 +19,13 @@ public class LevelRestart : MonoBehaviour
 
         if (Input.GetKey(_keyToHold) && Time.time - _timer > _timeHoldToRestart)
         {
-            Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+            ReloadScene();
         }
+    }
+
+    static public void ReloadScene()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }
