@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
 using System.Numerics;
+using GameJam.Scripts.Obstacles.States;
+using GameJam.Scripts.Utils;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -17,9 +20,9 @@ public class PlayerController : MonoBehaviour
     public float sideWallDetectionWidth;
 
     public LayerMask groundLayer;
+    
     private bool _leftWall;
     private bool _rightWall;
-
     private bool _floor;
 
     private Rigidbody2D _rb;
@@ -28,9 +31,12 @@ public class PlayerController : MonoBehaviour
     private float _horizontalPrevious;
     private bool _jump;
 
+    private bool _movementBlocked;
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _movementBlocked = false;
     }
 
     void Update()
@@ -55,27 +61,30 @@ public class PlayerController : MonoBehaviour
             transform.position + Vector3.right * (sideWallDetectionDistance + sideWallDetectionWidth) +
             Vector3.down * sideWallDetectionHeight / 2, groundLayer);
 
-        if (!_floor)
+        if (!_movementBlocked)
         {
-            if (_leftWall)
+            if (!_floor)
             {
-                _horizontal = Mathf.Max(_horizontal, 0f);
+                if (_leftWall)
+                {
+                    _horizontal = Mathf.Max(_horizontal, 0f);
+                }
+                else if (_rightWall)
+                {
+                    _horizontal = Mathf.Min(_horizontal, 0f);
+                }
             }
-            else if (_rightWall)
+
+            //Stopping player only if it was previously moving (to enable moving with platforms)
+            if (Mathf.Abs(_horizontalPrevious) > 1e-3 || Mathf.Abs(_horizontal) > 1e-3)
             {
-                _horizontal = Mathf.Min(_horizontal, 0f);
+                HorizontalMove(Mathf.Lerp(_rb.velocity.x, _horizontal * speed, lerpTime));
             }
-        }
 
-        //Stopping player only if it was previously moving (to enable moving with platforms)
-        if (Mathf.Abs(_horizontalPrevious) > 1e-3 || Mathf.Abs(_horizontal) > 1e-3)
-        {
-            HorizontalMove(Mathf.Lerp(_rb.velocity.x, _horizontal * speed, lerpTime));
-        }
-
-        if (_floor && _jump)
-        {
-            VerticalMove(jumpVelocity);
+            if (_floor && _jump)
+            {
+                VerticalMove(jumpVelocity);
+            }
         }
 
         _horizontalPrevious = _horizontal;
@@ -105,5 +114,23 @@ public class PlayerController : MonoBehaviour
             new Vector3(sideWallDetectionWidth, sideWallDetectionHeight, 0f));
         Gizmos.DrawWireCube(transform.position + Vector3.right * sideWallDetectionDistance,
             new Vector3(sideWallDetectionWidth, sideWallDetectionHeight, 0f));
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.layer == Layers.Bouncer)
+        {
+            if (col.TryGetComponent(out BouncingObjectState bouncer))
+            {
+                StartCoroutine(blockMovement(bouncer._movementBlockTime));
+                _rb.velocity =bouncer._bounceDirection.localPosition * bouncer._bounceForce;
+            }
+        }
+    }
+    
+    IEnumerator blockMovement(float blockTime) {
+        _movementBlocked = true;
+        yield return new WaitForSeconds(blockTime);
+        _movementBlocked = false;
     }
 }

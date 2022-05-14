@@ -4,5 +4,6 @@ namespace GameJam.Scripts.Utils
     {
         public const int Ground = 6;
         public const int Point = 7;
+        public const int Bouncer = 8;
     }
 }
