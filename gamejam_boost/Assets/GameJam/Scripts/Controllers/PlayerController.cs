@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rb;
 
     private Vector2 _previousVelocity;
+    private Vector2 _prevPos;
+    private Vector2 _direction;
 
     private float _horizontal;
     private float _horizontalPrevious;
@@ -89,8 +91,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        _direction = _rb.position - _prevPos;
+        
         _previousVelocity = _rb.velocity;
         _horizontalPrevious = _horizontal;
+        _prevPos = _rb.position;
         _jump = false;
     }
 
@@ -127,6 +132,13 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(blockMovement(bouncer._movementBlockTime));
                 _rb.velocity = Vector2.Reflect( _previousVelocity.normalized, bouncer.transform.up) * bouncer._bounceForce;
+            }
+        }
+        else if (col.gameObject.layer == Layers.GoodSheep)
+        {
+            if (col.collider.TryGetComponent(out GoodSheepState sheep))
+            {
+                _rb.velocity = Vector2.Reflect( _direction.normalized, sheep.transform.up) * sheep.BounceForce;
             }
         }
     }
