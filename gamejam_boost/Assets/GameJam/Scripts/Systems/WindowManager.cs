@@ -54,7 +54,7 @@ namespace GameJam.Scripts.Systems
 
         public void OpenMainmenu(WindowMode mode = WindowMode.Add)
         {
-            MainscreenWindow window = OpenWindow<MainscreenWindow>(WindowMode.Add);
+            MainscreenWindow window = OpenWindow<MainscreenWindow>(mode);
             MainscreenModel model = new MainscreenModel
             {
                 Levels = Game.LevelManager.LevelsData.Levels.Select(l => new LevelModel(l.LevelName, l.LevelBuildId))
