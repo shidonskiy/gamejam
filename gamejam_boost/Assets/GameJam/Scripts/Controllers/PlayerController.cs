@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
             Vector3.up * sideWallDetectionHeight / 2,
             transform.position + Vector3.right * (sideWallDetectionDistance + sideWallDetectionWidth/2) +
             Vector3.down * sideWallDetectionHeight / 2, groundLayer);
-
+        
         if (!_movementBlocked)
         {
             if (!_floor)
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
             if (_floor && _jump)
             {
                 VerticalMove(jumpVelocity);
-                _player.Jump();
+                _player.Jump(true);
             }
         }
         

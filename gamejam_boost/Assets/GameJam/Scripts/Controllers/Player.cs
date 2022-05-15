@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using GameJam.Scripts.Obstacles;
 using GameJam.Scripts.Obstacles.States;
 using GameJam.Scripts.Utils;
@@ -16,15 +17,20 @@ namespace GameJam.Scripts.Controllers
         public event Action Death;
         public event Action LevelFinished;
 
-        public void Jump()
+        public void Jump(bool value)
         {
             if (GoodState.isActiveAndEnabled)
             {
-                GoodState.Animator.SetTrigger(JumpKey);
+                GoodState.Animator.SetBool(JumpKey, value);
             }
             if (BadState.isActiveAndEnabled)
             {
-                BadState.Animator.SetTrigger(JumpKey);
+                BadState.Animator.SetBool(JumpKey, value);
+            }
+
+            if (value)
+            {
+                StartCoroutine(_ResetJump());
             }
         }
         
@@ -50,6 +56,13 @@ namespace GameJam.Scripts.Controllers
             {
                 BadState.Animator.SetBool(FallKey, value);
             }
+        }
+
+        private IEnumerator _ResetJump()
+        {
+            yield return null;
+            
+            Jump(false);
         }
 
         public void Die()
