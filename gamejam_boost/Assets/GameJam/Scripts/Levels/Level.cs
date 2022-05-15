@@ -35,6 +35,7 @@ namespace GameJam.Scripts.Levels
 
         public event Action<int, int> PointsGained;
         public event Action RestartLevel;
+        public event Action LevelCompleted;
 
         public override void Setup(Game game)
         {
@@ -61,7 +62,13 @@ namespace GameJam.Scripts.Levels
             
             _player.PointCollected += PlayerOnPointCollected;
             _player.Death += PlayerOnDeath;
+            _player.LevelFinished += PlayerOnLevelFinished;
             _controller.FinishTransition();
+        }
+
+        private void PlayerOnLevelFinished()
+        {
+            LevelComplete();
         }
 
         private void PlayerOnDeath()
@@ -191,6 +198,16 @@ namespace GameJam.Scripts.Levels
         public void Restart()
         {
             RestartLevel?.Invoke();
+        }
+        
+        public void LevelComplete()
+        {
+            OnLevelCompleted();
+        }
+
+        protected virtual void OnLevelCompleted()
+        {
+            LevelCompleted?.Invoke();
         }
     }
 }
