@@ -1,3 +1,4 @@
+using GameJam.Scripts.Systems;
 using UnityEngine;
 
 namespace GameJam.Scripts.UI.Windows
@@ -8,7 +9,7 @@ namespace GameJam.Scripts.UI.Windows
         {
             if (Input.anyKeyDown)
             {
-                Game.WindowManager.OpenMainmenu();
+                Game.WindowManager.OpenMainmenu(WindowManager.WindowMode.Clear);
             }
         }
     }
