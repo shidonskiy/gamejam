@@ -1,6 +1,7 @@
 using GameJam.Scripts.Levels;
+using GameJam.Scripts.Obstacles;
 using GameJam.Scripts.Systems;
-using TMPro;
+using GameJam.Scripts.UI.Elements;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ namespace GameJam.Scripts.UI.Windows
     public class LevelWindow : BaseWindow<Level>
     {
         [SerializeField] private Button _menuButton;
-        [SerializeField] private TextMeshProUGUI _pointsText;
+        [SerializeField] private PointsController _points;
 
         void Awake()
         {
@@ -43,9 +44,9 @@ namespace GameJam.Scripts.UI.Windows
             Game.WindowManager.OpenWindow<RestartWindow>(WindowManager.WindowMode.Clear).Setup(Game);
         }
 
-        private void ModelOnPointsGained(int current, int max)
+        private void ModelOnPointsGained(BaseObstacle.ObstacleState state, int current)
         {
-            _pointsText.text = $"{current}/{max}";
+            _points.UpdatePoints(state, current);
         }
 
         protected virtual void OnMenuButtonClick()

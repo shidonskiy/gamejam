@@ -33,7 +33,7 @@ namespace GameJam.Scripts.Levels
         private int _currentPoints = 0;
         private Coroutine _transitionRoutine;
 
-        public event Action<int, int> PointsGained;
+        public event Action<BaseObstacle.ObstacleState, int> PointsGained;
         public event Action RestartLevel;
         public event Action LevelCompleted;
 
@@ -43,7 +43,7 @@ namespace GameJam.Scripts.Levels
 
             LevelWindow window = Game.WindowManager.OpenWindow<LevelWindow>(WindowManager.WindowMode.Clear);
             window.Setup(Game, this);
-            OnPointsGained(_currentPoints, _pointToSwitch);
+            OnPointsGained(_currentPoints);
         }
 
         public void ShowAll()
@@ -105,7 +105,7 @@ namespace GameJam.Scripts.Levels
             _currentPoints++;
             Refresh();
             
-            OnPointsGained(_currentPoints, _pointToSwitch);
+            OnPointsGained(_currentPoints);
         }
 
         private void Refresh()
@@ -197,9 +197,9 @@ namespace GameJam.Scripts.Levels
             Gizmos.DrawWireSphere(_player.transform.position, _radius);
         }
 
-        protected virtual void OnPointsGained(int current, int max)
+        protected virtual void OnPointsGained(int current)
         {
-            PointsGained?.Invoke(current, max);
+            PointsGained?.Invoke(_currentState, current);
         }
 
         public void Restart()
