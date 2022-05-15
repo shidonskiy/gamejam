@@ -43,7 +43,7 @@ namespace GameJam.Scripts.Obstacles.States
             var position = transform.position;
             float t = Vector2.Distance(position, _currentTarget) / _distance;
             step *= _curve.Evaluate(t);
-            _rb.MovePosition(Vector3.MoveTowards(position, _currentTarget, step));
+            _rb.MovePosition(Vector2.MoveTowards(position, _currentTarget, step));
 
             if (Vector2.Distance(_rb.position, _currentTarget) <= Mathf.Epsilon)
             {

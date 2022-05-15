@@ -17,7 +17,7 @@ namespace GameJam.Scripts.Obstacles.States
             }
             
             var step = _speed * Time.fixedDeltaTime;
-            _rb.MovePosition(Vector3.MoveTowards(transform.position, _currentTarget, step));
+            _rb.MovePosition(Vector2.MoveTowards(transform.position, _currentTarget, step));
 
             if (Vector2.Distance(_rb.position, _currentTarget) <= Mathf.Epsilon)
             {
