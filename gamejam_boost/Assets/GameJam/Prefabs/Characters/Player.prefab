@@ -116,7 +116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 531588950}
-  _spriteRenderer: {fileID: 1142224045310596976}
 --- !u!1 &2996657608483100691
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +232,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 8325667223286686836}
-  _spriteRenderer: {fileID: 1459511517422231717}
 --- !u!1 &7423930204302475970
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,8 +335,8 @@ MonoBehaviour:
   speed: 7
   jumpVelocity: 12
   lerpTime: 0.5
-  floorDetectionDistance: 0.62
-  floorDetectionRadius: 0.25
+  floorDetectionDistance: 0.41
+  floorDetectionRadius: 0.38
   sideWallDetectionDistance: 0.5
   sideWallDetectionHeight: 0.8
   sideWallDetectionWidth: 0.1
