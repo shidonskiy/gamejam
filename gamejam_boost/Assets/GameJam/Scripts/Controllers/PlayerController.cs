@@ -58,8 +58,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _floor = Physics2D.OverlapCircle(transform.position + Vector3.down * floorDetectionDistance,
-            floorDetectionRadius, groundLayer);
+        _floor = Physics2D.OverlapArea(transform.position + Vector3.down * floorDetectionDistance + Vector3.one * floorDetectionRadius,
+            transform.position + Vector3.down * floorDetectionDistance - Vector3.one * floorDetectionRadius, groundLayer);
         _leftWall = Physics2D.OverlapArea(
             transform.position + Vector3.left * (sideWallDetectionDistance - sideWallDetectionWidth) +
             Vector3.up * sideWallDetectionHeight / 2,
@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.red;
 
-        Gizmos.DrawWireSphere(transform.position + Vector3.down * floorDetectionDistance, floorDetectionRadius);
+        Gizmos.DrawWireCube(transform.position + Vector3.down * floorDetectionDistance, Vector3.one * floorDetectionRadius * 2);
         Gizmos.DrawWireCube(transform.position + Vector3.left * sideWallDetectionDistance,
             new Vector3(sideWallDetectionWidth, sideWallDetectionHeight, 0f));
         Gizmos.DrawWireCube(transform.position + Vector3.right * sideWallDetectionDistance,
