@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using GameJam.Scripts.Levels;
 using GameJam.Scripts.Models;
@@ -11,6 +12,7 @@ namespace GameJam.Scripts.Systems
     {
         [SerializeField] private WindowManager _windowManager;
         [SerializeField] private LevelManager _levelManager;
+        [SerializeField] private float _splashTime;
 
         public WindowManager WindowManager => _windowManager;
         public LevelManager LevelManager => _levelManager;
@@ -33,8 +35,9 @@ namespace GameJam.Scripts.Systems
             level.Setup(this);
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return new WaitForSeconds(_splashTime);
             LevelManager.LoadMenuLevel();
         }
     }

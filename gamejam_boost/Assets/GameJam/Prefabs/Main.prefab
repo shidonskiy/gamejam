@@ -352,6 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _windowManager: {fileID: 3167122034560550821}
   _levelManager: {fileID: 3167122033735444973}
+  _splashTime: 3
 --- !u!1 &3167122034789814215
 GameObject:
   m_ObjectHideFlags: 0
