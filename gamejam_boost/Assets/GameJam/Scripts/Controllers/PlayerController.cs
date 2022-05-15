@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 using GameJam.Scripts.Controllers;
 using GameJam.Scripts.Obstacles.States;
 using GameJam.Scripts.Utils;
@@ -15,7 +16,8 @@ public class PlayerController : MonoBehaviour
     public float jumpVelocity;
     public float lerpTime;
     public float floorDetectionDistance;
-    public float floorDetectionRadius;
+    public float floorDetectionHeight;
+    public float floorDetectionWidth;
     public float sideWallDetectionDistance;
     public float sideWallDetectionHeight;
     public float sideWallDetectionWidth;
@@ -26,9 +28,9 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 Direction => _direction;
     
-    private bool _leftWall;
-    private bool _rightWall;
-    private bool _floor;
+    public bool _leftWall;
+    public bool _rightWall;
+    public bool _floor;
 
     private Rigidbody2D _rb;
     
@@ -58,18 +60,22 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _floor = Physics2D.OverlapArea(transform.position + Vector3.down * floorDetectionDistance + Vector3.one * floorDetectionRadius,
-            transform.position + Vector3.down * floorDetectionDistance - Vector3.one * floorDetectionRadius, groundLayer);
+        _floor = Physics2D.OverlapArea(
+            transform.position + Vector3.down * (floorDetectionDistance-floorDetectionHeight/2) +
+            Vector3.left * floorDetectionWidth/2,
+            transform.position + Vector3.down * (floorDetectionDistance+floorDetectionHeight/2) +
+            Vector3.right * floorDetectionWidth/2, groundLayer);
+        
         _leftWall = Physics2D.OverlapArea(
-            transform.position + Vector3.left * (sideWallDetectionDistance - sideWallDetectionWidth) +
+            transform.position + Vector3.left * (sideWallDetectionDistance + sideWallDetectionWidth/2) +
             Vector3.up * sideWallDetectionHeight / 2,
-            transform.position + Vector3.left * (sideWallDetectionDistance + sideWallDetectionWidth) +
+            transform.position + Vector3.left * (sideWallDetectionDistance - sideWallDetectionWidth/2) +
             Vector3.down * sideWallDetectionHeight / 2, groundLayer);
 
         _rightWall = Physics2D.OverlapArea(
-            transform.position + Vector3.right * (sideWallDetectionDistance - sideWallDetectionWidth) +
+            transform.position + Vector3.right * (sideWallDetectionDistance - sideWallDetectionWidth/2) +
             Vector3.up * sideWallDetectionHeight / 2,
-            transform.position + Vector3.right * (sideWallDetectionDistance + sideWallDetectionWidth) +
+            transform.position + Vector3.right * (sideWallDetectionDistance + sideWallDetectionWidth/2) +
             Vector3.down * sideWallDetectionHeight / 2, groundLayer);
 
         if (!_movementBlocked)
@@ -129,7 +135,8 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.red;
 
-        Gizmos.DrawWireCube(transform.position + Vector3.down * floorDetectionDistance, Vector3.one * floorDetectionRadius * 2);
+        Gizmos.DrawWireCube(transform.position + Vector3.down * floorDetectionDistance,
+            new Vector3(floorDetectionWidth, floorDetectionHeight, 0f));
         Gizmos.DrawWireCube(transform.position + Vector3.left * sideWallDetectionDistance,
             new Vector3(sideWallDetectionWidth, sideWallDetectionHeight, 0f));
         Gizmos.DrawWireCube(transform.position + Vector3.right * sideWallDetectionDistance,

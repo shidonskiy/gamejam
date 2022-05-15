@@ -335,15 +335,19 @@ MonoBehaviour:
   speed: 7
   jumpVelocity: 12
   lerpTime: 0.5
-  floorDetectionDistance: 0.41
-  floorDetectionRadius: 0.38
+  floorDetectionDistance: 0.75
+  floorDetectionHeight: 0.15
+  floorDetectionWidth: 0.85
   sideWallDetectionDistance: 0.5
-  sideWallDetectionHeight: 0.8
-  sideWallDetectionWidth: 0.1
+  sideWallDetectionHeight: 1.1
+  sideWallDetectionWidth: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 2624
   _player: {fileID: 1603997416}
+  _leftWall: 0
+  _rightWall: 0
+  _floor: 0
 --- !u!114 &1603997416
 MonoBehaviour:
   m_ObjectHideFlags: 0
