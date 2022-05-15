@@ -113,6 +113,8 @@ namespace GameJam.Scripts.Levels
             if (_currentPoints >= _pointToSwitch)
             {
                 _currentPoints = 0;
+                BaseObstacle.ObstacleState prevState;
+                prevState = _currentState;
                 _currentState = _currentState == BaseObstacle.ObstacleState.Bad
                     ? BaseObstacle.ObstacleState.Good
                     : BaseObstacle.ObstacleState.Bad;
@@ -120,18 +122,20 @@ namespace GameJam.Scripts.Levels
                 if (_transitionRoutine != null)
                 {
                     StopCoroutine(_transitionRoutine);
+                    UpdateTransition(prevState, true);
+                    _controller.FinishTransition();
                 }
                 _transitionRoutine = StartCoroutine(TransitionRoutine());
             }
         }
 
-        private void UpdateTransition(bool last = false)
+        private void UpdateTransition(BaseObstacle.ObstacleState state, bool last = false)
         {
             _controller.UpdateTransition(_player.transform.position, _radius, _maxRadius);
             
             foreach (var obstacle in _obstacles)
             {
-                obstacle.UpdateTransition(_player.transform.position, _radius, _currentState, last);
+                obstacle.UpdateTransition(_player.transform.position, _radius, state, last);
             }
         }
 
@@ -145,11 +149,12 @@ namespace GameJam.Scripts.Levels
             
             _controller.StartTransition();
             _controller.UpdateState(_currentState);
+            var state = _currentState;
             
             while (currentTime < _transitionTime)
             {
                 _radius += speed * Time.deltaTime;
-                UpdateTransition();
+                UpdateTransition(state);
                 yield return null;
                 
                 currentTime += Time.deltaTime;
@@ -157,8 +162,10 @@ namespace GameJam.Scripts.Levels
 
             _radius = _maxRadius;
             _isTransition = false;
-            UpdateTransition(true);
+            UpdateTransition(state,true);
             _controller.FinishTransition();
+
+            _transitionRoutine = null;
         }
 
         private List<BaseObstacle> GetLevelObstacles()
