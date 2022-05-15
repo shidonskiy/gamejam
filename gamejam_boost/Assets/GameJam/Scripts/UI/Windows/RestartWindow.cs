@@ -1,8 +1,4 @@
-using GameJam.Scripts.Levels;
-using GameJam.Scripts.Systems;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace GameJam.Scripts.UI.Windows
 {
