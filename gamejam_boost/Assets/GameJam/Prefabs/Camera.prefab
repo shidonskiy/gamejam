@@ -131,7 +131,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5e1a579d8b29d4141b5332526875baaf, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 64bd61f7e37c1e840a90de52742738f6, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.75
   m_Pitch: 1
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _badStateAudio: {fileID: 8300000, guid: a9e27a6f2e46bdf4a91affcfc7082f4d, type: 3}
-  _goodStateAudio: {fileID: 8300000, guid: 93c522be87c578149896fade7b841a38, type: 3}
+  _goodStateAudio: {fileID: 8300000, guid: 64bd61f7e37c1e840a90de52742738f6, type: 3}
   _audioTransitionTime: 0.5
 --- !u!1001 &2964924240440614359
 PrefabInstance:
