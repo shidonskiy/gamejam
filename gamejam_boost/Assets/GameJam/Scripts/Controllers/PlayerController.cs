@@ -153,7 +153,9 @@ public class PlayerController : MonoBehaviour
             case Layers.GoodSheep:
                 if (col.collider.TryGetComponent(out GoodSheepState sheep))
                 {
-                    _rb.velocity = Vector2.Reflect( _direction.normalized, sheep.transform.up) * sheep.BounceForce;
+                    //_rb.velocity = Vector2.Reflect( _direction.normalized, sheep.transform.up) * sheep.BounceForce;
+                    _rb.velocity = sheep.transform.up * sheep.BounceForce;
+
                 }
                 break;
             case Layers.Spikes:
