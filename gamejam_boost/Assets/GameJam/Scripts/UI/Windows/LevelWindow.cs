@@ -34,7 +34,7 @@ namespace GameJam.Scripts.UI.Windows
 
         private void ModelOnRestartLevel()
         {
-            Game.LevelManager.RestartLevel();
+            Game.WindowManager.OpenWindow<RestartWindow>(WindowManager.WindowMode.Clear).Setup(Game);
         }
 
         private void ModelOnPointsGained(int current, int max)
