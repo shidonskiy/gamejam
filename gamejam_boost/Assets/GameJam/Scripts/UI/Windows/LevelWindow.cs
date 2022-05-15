@@ -30,6 +30,12 @@ namespace GameJam.Scripts.UI.Windows
             
             Model.PointsGained += ModelOnPointsGained;
             Model.RestartLevel += ModelOnRestartLevel;
+            Model.LevelCompleted += ModelOnLevelCompleted;
+        }
+
+        private void ModelOnLevelCompleted()
+        {
+            Game.WindowManager.OpenWindow<CompleteWindow>(WindowManager.WindowMode.Clear).Setup(Game);
         }
 
         private void ModelOnRestartLevel()

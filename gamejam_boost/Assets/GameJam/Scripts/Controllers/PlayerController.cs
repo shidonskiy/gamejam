@@ -179,10 +179,23 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 break;
+            case Layers.Complete:
+                _player.Complete();
+                break;
         }
 
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        switch (other.gameObject.layer)
+        {
+            case Layers.Complete:
+                _player.Complete();
+                break;
+        }
+    }
+
     IEnumerator blockMovement(float blockTime) {
         _movementBlocked = true;
         yield return new WaitForSeconds(blockTime);

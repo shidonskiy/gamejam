@@ -14,6 +14,7 @@ namespace GameJam.Scripts.Controllers
 
         public event Action<PointState.PointType> PointCollected;
         public event Action Death;
+        public event Action LevelFinished;
 
         public void Jump()
         {
@@ -56,6 +57,11 @@ namespace GameJam.Scripts.Controllers
             OnDeath();
         }
         
+        public void Complete()
+        {
+            OnLevelFinished();
+        }
+        
         public void UpdateDirection(float direction)
         {
             GoodState.UpdateDirection(direction);
@@ -93,6 +99,11 @@ namespace GameJam.Scripts.Controllers
         protected virtual void OnDeath()
         {
             Death?.Invoke();
+        }
+        
+        protected virtual void OnLevelFinished()
+        {
+            LevelFinished?.Invoke();
         }
     }
 }
